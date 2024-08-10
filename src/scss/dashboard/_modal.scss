@@ -1,0 +1,66 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.modal{
+    //para que ocupe toda la pantalla
+    position: absolute;
+    background-color: rgb(0 0 0 / .8);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    .formulario{
+        max-width: 60rem;
+        background-color: v.$blanco;
+        padding: 2rem;
+        margin: 0 auto;
+        transform: translateY(-30rem); //el modal está muyyy arriba
+        transition-property: all;   //animar todos los transform q haya
+        transition-duration: 500ms;
+        transition-timing-function: ease-in; //comienza rapido y baja lento
+        opacity: 0;
+        border-radius: .5rem;
+
+        legend{
+            font-size: 2rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        input[type="text"]{
+            border: .5px solid v.$gris;
+            border-radius: .5rem;
+        }
+
+        .opciones{
+            display: flex;
+            gap: 2rem;
+            justify-content: space-around;
+            .submit-nueva-tarea{
+                @include m.boton(v.$indigo, v.$blanco);
+                border-radius: .5rem;
+            }
+    
+            .cerrar-modal{
+                @include m.boton(v.$naranja, v.$blanco);
+                border-radius: .5rem;
+            }
+        }
+
+      
+
+        &.animar{
+            position: relative; //esto permite el top de abajo
+            top: 50%;   //calcula el % de la pantalla y desde ahi pone el objeto
+            transform: translateY(-80%); //mide el objeto y lo lleva 50% mas arriba, es decir si mide 4cm, lo lleva 2cm mas arriba
+            opacity: 1;
+        }
+        &.cerrar{
+            transform: translateY(-200%); //mide el objeto y lo lleva 50% mas arriba, es decir si mide 4cm, lo lleva 2cm mas arriba
+            opacity: 0;
+        }
+    }
+}
